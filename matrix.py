@@ -30,19 +30,18 @@ def make_hermite():
 
 def generate_curve_coefs( p1, p2, p3, p4, t ):
     #m2 = [[p1],[p2],[p3],[p4]]
-    m2 = [[p1, p2, p3, p4]]
+    m2 = new_matrix(4,1)
+    #print m2
     if (t == 'hermite'):
         m1 = make_hermite()
     elif (t == 'bezier'):
         m1 = make_bezier()
-    else:
-        m1 = [] #should never occur
-    #print "m1"
-    #print_matrix(m1)
-    #print "m2"
-    #print_matrix(m2)
+    m2[0][0] = p1
+    m2[0][1] = p2
+    m2[0][2] = p3
+    m2[0][3] = p4
     matrix_mult(m1, m2)
-    #print_matrix(m2)
+    #print m2
     return m2
         
 def make_translate( x, y, z ):

@@ -16,10 +16,12 @@ def add_circle( points, cx, cy, cz, r, step ):
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     t = 0
     while (t < 1):
-        x = generate_curve_coefs(x0, x1, x2, x3, curve_type)
-        #print x
-        y = generate_curve_coefs(y0, y1, y2, y3, curve_type)
-        #print y
+        x_matrix = generate_curve_coefs(x0, x1, x2, x3, curve_type)
+        #print x_matrix
+        y_matrix = generate_curve_coefs(y0, y1, y2, y3, curve_type)
+        #print y_matrix
+        x = x_matrix[0][0] * (t ** 3) + x_matrix[0][1] * (t ** 2) + x_matrix[0][2] * t + x_matrix[0][3]
+        y = y_matrix[0][0] * (t ** 3) + y_matrix[0][1] * (t ** 2) + y_matrix[0][2] * t + y_matrix[0][3]
         add_point(points, x, y)
         #points.append([x, y, 0, 1])
         t += step
@@ -31,11 +33,16 @@ def draw_lines( matrix, screen, color ):
     
     point = 0
     while point < len(matrix) - 1:
-        draw_line( int(matrix[point][0]),
+        #print matrix[point]
+        #print matrix[point][0]
+        try:
+            draw_line( int(matrix[point][0]),
                    int(matrix[point][1]),
                    int(matrix[point+1][0]),
                    int(matrix[point+1][1]),
-                   screen, color)    
+                   screen, color)
+        except:
+            pass
         point+= 2
         
 def add_edge( matrix, x0, y0, z0, x1, y1, z1 ):
