@@ -21,3 +21,6 @@ transform = new_matrix()
 
 #dw test file
 parse_file( 'script', edges, transform, screen, color )
+
+#henry
+#parse_file( 'android', edges, transform, screen, color )
